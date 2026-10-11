@@ -12,15 +12,25 @@
 <body>
   <header class="header">
     <div class="container">
-      <a href="index.html" class="logo"><span class="material-symbols-outlined text-primary">wifi_tethering</span>SPEEDMAX <span style="font-size: 1rem; color: var(--text-main); font-weight: 600;">FTTH</span></a>
-      <nav class="nav-links">
+      <a href="index.html" class="logo">
+        <span class="material-symbols-outlined text-primary">wifi_tethering</span>
+        SPEEDMAX <span style="font-size: 1rem; color: var(--text-main); font-weight: 600;">FTTH</span>
+      </a>
+      
+      <!-- Botón de menú para móviles -->
+      <button class="mobile-menu-btn" aria-label="Abrir menú" aria-expanded="false">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+
+      <nav class="nav-links" aria-label="Navegación principal">
         <a href="index.html">Inicio</a>
         <a href="novedades.html">Novedades</a>
         <a href="beneficios.html">Beneficios</a>
         <a href="faq.html">Preguntas Frecuentes</a>
-        <a href="contacto.html" class="active">Contacto</a>
+        <a href="contacto.html">Contacto</a>
       </nav>
-      <a href="contacto.html" class="btn btn-primary">Cotizar Servicio</a>
+      <!-- Le añadimos una clase extra al botón para ocultarlo si falta espacio en móvil -->
+      <a href="contacto.html" class="btn btn-primary btn-header-cotizar">Cotizar Servicio</a>
     </div>
   </header>
 
@@ -132,7 +142,7 @@
       </div>
     </div>
     <div class="container footer-bottom">
-      <p>© 2026 Speedmax Internet Fibra Óptica San Juan de Lurigancho. Reservados todos los derechos.</p>
+      <p>© <span id="currentYear">2026</span> Speedmax Internet Fibra Óptica San Juan de Lurigancho. Reservados todos los derechos.</p>
       <p style="color: var(--primary); display: flex; align-items: center; gap: 8px; font-weight: 700;"><span class="material-symbols-outlined" style="font-size: 1.1rem;">gpp_good</span> FTTH Gigabit Simétrico</p>
     </div>
   </footer>

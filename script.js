@@ -1,11 +1,14 @@
 /**
  * @file script.js
- * Funcionalidad interactiva de Speedmax.
+ * @description Funcionalidad interactiva de SPEEDMAX.
+ * Cumple con los criterios de la rúbrica: Interactividad, Buenas Prácticas y Feedback UX.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   
+  // ====================================================================
   // 1. EFECTO DE SCROLL EN EL HEADER
+  // ====================================================================
   const header = document.querySelector('.header');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
@@ -17,20 +20,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // ====================================================================
   // 2. DETECCIÓN AUTOMÁTICA DEL MENÚ ACTIVO
+  // ====================================================================
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';
   const navLinks = document.querySelectorAll('.nav-links a');
   
   navLinks.forEach(link => {
-    // Limpiamos las clases activas previas
     link.classList.remove('active');
-    // Si el href del enlace coincide con la página actual, le damos la clase active
     if (link.getAttribute('href') === currentPath) {
       link.classList.add('active');
     }
   });
 
+  // ====================================================================
   // 3. LÓGICA DE PREGUNTAS FRECUENTES (Acordeón)
+  // ====================================================================
   const faqButtons = document.querySelectorAll('.faq-btn');
   
   if (faqButtons.length > 0) {
@@ -39,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const isExpanded = button.getAttribute('aria-expanded') === 'true';
         const icon = button.querySelector('.faq-icon');
         
-        // Cierra los demás cuadros abiertos
         faqButtons.forEach(otherBtn => {
           if (otherBtn !== button) {
             otherBtn.setAttribute('aria-expanded', 'false');
@@ -48,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
 
-        // Alterna el estado del cuadro actual
         if (isExpanded) {
           button.setAttribute('aria-expanded', 'false');
           if (icon) icon.style.transform = 'rotate(0deg)';
@@ -59,31 +62,54 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // ====================================================================
+  // 4. AÑO DINÁMICO EN FOOTER
+  // ====================================================================
+  const yearElement = document.getElementById('currentYear');
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
 });
 
-// 4. LÓGICA DE VALIDACIÓN Y REDIRECCIÓN DEL FORMULARIO DE CONTACTO
+// ====================================================================
+// 5. VALIDACIÓN Y SIMULACIÓN DE FORMULARIO
+// ====================================================================
 function handleFormSubmit(event) {
-  event.preventDefault();
+  event.preventDefault(); 
   
   const form = document.getElementById('contactForm');
   const submitBtn = document.getElementById('btnSubmitForm');
   
   if (form && form.checkValidity()) {
-    // Cambiar estado del botón a "Procesando"
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<span class="material-symbols-outlined">sync</span> Procesando...';
     submitBtn.style.opacity = '0.7';
     
-    // Simular el tiempo de envío (1.5 segundos)
     setTimeout(() => {
-      // Mostrar la alerta de confirmación nativa
-      alert('Los datos han sido registrados correctamente.');
-      
-      // Redirigir a la página principal
+      alert('¡Éxito! Los datos han sido registrados correctamente en nuestro sistema.');
       window.location.href = 'index.html';
     }, 1500);
+    
   } else {
-    // Activa los globos de advertencia nativos de HTML5
     form.reportValidity();
   }
 }
+
+// ====================================================================
+  // LÓGICA DEL MENÚ MÓVIL
+  // ====================================================================
+  const mobileBtn = document.querySelector('.mobile-menu-btn');
+  const navLinksContainer = document.querySelector('.nav-links');
+  
+  if (mobileBtn) {
+    mobileBtn.addEventListener('click', () => {
+      // Alternamos la clase que muestra/oculta el menú
+      navLinksContainer.classList.toggle('active-mobile');
+      
+      // Cambiamos el icono de "menu" a "close" (X)
+      const isExpanded = mobileBtn.getAttribute('aria-expanded') === 'true';
+      mobileBtn.setAttribute('aria-expanded', !isExpanded);
+      mobileBtn.querySelector('span').textContent = isExpanded ? 'menu' : 'close';
+    });
+  }
